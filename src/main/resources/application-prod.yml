@@ -1,0 +1,35 @@
+server:
+  port: 9000
+  error:
+    whitelabel:
+      enabled: true
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/simple-auth
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+    show-sql: false
+
+  h2:
+    console:
+      enabled: false
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+      SQL: debug

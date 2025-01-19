@@ -54,6 +54,7 @@ public class TokenUtils {
         return Jwts.builder()
                 .claim("id", user.getId())
                 .subject(user.getUsername())
+                .claim("issuer", "clean-backend-api")
                 .claim("name", user.getUsername())
                 .claim("authorities", user.getAuthorities())
                 .issuedAt(new Date())

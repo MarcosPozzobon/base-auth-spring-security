@@ -46,7 +46,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(NOT_FOUND.value())
                 .title("Invalid date!")
                 .build();
@@ -58,7 +57,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(UNAUTHORIZED.value())
                 .title("Invalid Credentials")
                 .build();
@@ -70,7 +68,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(NOT_ACCEPTABLE.value())
                 .title("File size exception")
                 .build();
@@ -91,7 +88,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(result)
-                .devMsg(ex.getClass().getName())
                 .status(BAD_REQUEST.value())
                 .title("Data Violation")
                 .build();
@@ -103,7 +99,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(BAD_REQUEST.value())
                 .title("Image not found!")
                 .build();
@@ -122,7 +117,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(message.toString())
-                .devMsg(ex.getClass().getName())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .title("Invalid Arguments!")
                 .build();
@@ -134,7 +128,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(BAD_REQUEST.value())
                 .title("Data violation")
                 .build();
@@ -146,7 +139,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(BAD_REQUEST.value())
                 .title("NoPermissionException")
                 .build();
@@ -158,7 +150,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(UNAUTHORIZED.value())
                 .title("Permission Denied!")
                 .build();
@@ -170,7 +161,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(BAD_REQUEST.value())
                 .title("MethodArgumentTypeMismatchException")
                 .build();
@@ -182,7 +172,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(BAD_REQUEST.value())
                 .title("EmptyResultDataAccessException")
                 .build();
@@ -194,7 +183,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(BAD_REQUEST.value())
                 .title("HttpRequestMethodNotSupportedException")
                 .build();
@@ -206,7 +194,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(BAD_REQUEST.value())
                 .title("MethodArgumentNotValidException")
                 .build();
@@ -218,7 +205,6 @@ public class RestExceptionHandler {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
                 .status(BAD_REQUEST.value())
                 .title("IllegalArgumentException")
                 .build();

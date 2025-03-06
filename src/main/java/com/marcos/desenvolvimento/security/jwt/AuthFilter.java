@@ -1,5 +1,6 @@
 package com.marcos.desenvolvimento.security.jwt;
 
+import com.marcos.desenvolvimento.exceptions.MissingAuthorizationHeaderException;
 import com.marcos.desenvolvimento.security.services.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -46,7 +47,8 @@ public class AuthFilter extends OncePerRequestFilter {
             }
 
         } catch (Exception e) {
-            log.error("Cannot set user authentication: {}", e.getMessage());
+            log.error("Cannot set user authentication: " + e.getCause());
+            //throw e;
         }
 
         filterChain.doFilter(request, response);

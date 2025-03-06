@@ -28,6 +28,17 @@ import static org.springframework.http.HttpStatus.*;
 @RestControllerAdvice
 public class RestExceptionHandler {
 
+    @ResponseStatus(UNAUTHORIZED)
+    @ExceptionHandler(MissingAuthorizationHeaderException.class)
+    public ExceptionFilters MissingAuthorizationHeaderException(MissingAuthorizationHeaderException ex) {
+        return ExceptionFilters.builder()
+                .timestamp(LocalDateTime.now())
+                .details(ex.getMessage())
+                .status(UNAUTHORIZED.value())
+                .title("MissingAuthorizationHeaderException")
+                .build();
+    }
+
     @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(UserNotFoundException.class)
     public ExceptionFilters handleUserNotFound(final UserNotFoundException ex) {
@@ -209,5 +220,6 @@ public class RestExceptionHandler {
                 .title("IllegalArgumentException")
                 .build();
     }
+
 }
 

@@ -1,5 +1,6 @@
 package com.marcos.desenvolvimento.security.jwt;
 
+import com.marcos.desenvolvimento.exceptions.MissingAuthorizationHeaderException;
 import com.marcos.desenvolvimento.security.services.UserDetailsImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

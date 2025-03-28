@@ -18,7 +18,6 @@ import java.util.Map;
 @Slf4j
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
-
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
         log.error("Access Denied: {}", accessDeniedException.getMessage());

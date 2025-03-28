@@ -1,22 +1,24 @@
 package com.marcos.desenvolvimento.exceptions.handler;
 
 import com.marcos.desenvolvimento.exceptions.*;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.security.WeakKeyException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import org.springframework.web.multipart.MaxUploadSizeExceededException;
-import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import javax.naming.NoPermissionException;
-import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Set;
@@ -27,17 +29,6 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
-
-    @ResponseStatus(UNAUTHORIZED)
-    @ExceptionHandler(MissingAuthorizationHeaderException.class)
-    public ExceptionFilters MissingAuthorizationHeaderException(MissingAuthorizationHeaderException ex) {
-        return ExceptionFilters.builder()
-                .timestamp(LocalDateTime.now())
-                .details(ex.getMessage())
-                .status(UNAUTHORIZED.value())
-                .title("MissingAuthorizationHeaderException")
-                .build();
-    }
 
     @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(UserNotFoundException.class)
@@ -73,17 +64,6 @@ public class RestExceptionHandler {
                 .build();
     }
 
-    @ResponseStatus(NOT_ACCEPTABLE)
-    @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ExceptionFilters maxFileSizeExceeded(final MaxUploadSizeExceededException ex) {
-        return ExceptionFilters.builder()
-                .timestamp(LocalDateTime.now())
-                .details(ex.getMessage())
-                .status(NOT_ACCEPTABLE.value())
-                .title("File size exception")
-                .build();
-    }
-
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ExceptionFilters dataIntegrationViolation(final DataIntegrityViolationException ex) {
@@ -105,17 +85,6 @@ public class RestExceptionHandler {
     }
 
     @ResponseStatus(BAD_REQUEST)
-    @ExceptionHandler(MissingServletRequestPartException.class)
-    public ExceptionFilters missingServletRequestPartException(final MissingServletRequestPartException ex) {
-        return ExceptionFilters.builder()
-                .timestamp(LocalDateTime.now())
-                .details(ex.getMessage())
-                .status(BAD_REQUEST.value())
-                .title("Image not found!")
-                .build();
-    }
-
-    @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(ConstraintViolationException.class)
     public ExceptionFilters constraintViolationException(ConstraintViolationException ex) {
 
@@ -130,17 +99,6 @@ public class RestExceptionHandler {
                 .details(message.toString())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .title("Invalid Arguments!")
-                .build();
-    }
-
-    @ResponseStatus(INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(FileNotFoundException.class)
-    public ExceptionFilters fileNotFoundException(FileNotFoundException ex) {
-        return ExceptionFilters.builder()
-                .timestamp(LocalDateTime.now())
-                .details(ex.getMessage())
-                .status(BAD_REQUEST.value())
-                .title("Data violation")
                 .build();
     }
 
@@ -210,14 +168,47 @@ public class RestExceptionHandler {
                 .build();
     }
 
-    @ResponseStatus(BAD_REQUEST)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
-    public ExceptionFilters illegalArgumentException(IllegalArgumentException ex) {
+    public ExceptionFilters handleIllegalArgumentException(IllegalArgumentException ex) {
         return ExceptionFilters.builder()
                 .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
-                .status(BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .title("IllegalArgumentException")
+                .build();
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler({WeakKeyException.class, SecurityException.class})
+    public ExceptionFilters handleInvalidSignatureException(Exception ex) {
+        return ExceptionFilters.builder()
+                .timestamp(LocalDateTime.now())
+                .details("Invalid JWT signature.")
+                .status(HttpStatus.UNAUTHORIZED.value())
+                .title("InvalidJWTSignature")
+                .build();
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(MalformedJwtException.class)
+    public ExceptionFilters handleMalformedJwtException(MalformedJwtException ex) {
+        return ExceptionFilters.builder()
+                .timestamp(LocalDateTime.now())
+                .details("Invalid JWT token.")
+                .status(HttpStatus.UNAUTHORIZED.value())
+                .title("MalformedJWT")
+                .build();
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(UnsupportedJwtException.class)
+    public ExceptionFilters handleUnsupportedJwtException(UnsupportedJwtException ex) {
+        return ExceptionFilters.builder()
+                .timestamp(LocalDateTime.now())
+                .details("Unsupported JWT type.")
+                .status(HttpStatus.UNAUTHORIZED.value())
+                .title("UnsupportedJWT")
                 .build();
     }
 

@@ -1,7 +1,7 @@
 package com.marcos.desenvolvimento.security.jwt;
 
-import com.marcos.desenvolvimento.exceptions.MissingAuthorizationHeaderException;
 import com.marcos.desenvolvimento.security.services.UserDetailsServiceImpl;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,12 +45,10 @@ public class AuthFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
-
-        } catch (Exception e) {
+        } catch (Exception e){
             log.error("Cannot set user authentication: " + e.getCause());
             //throw e;
         }
-
         filterChain.doFilter(request, response);
     }
 

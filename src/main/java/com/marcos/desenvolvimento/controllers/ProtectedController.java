@@ -12,7 +12,13 @@ public class ProtectedController {
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public String displayOkMessage(){
-        return "If you are seeing this, you are fully authenticated.";
+        return "If you are seeing this, you are fully authenticated as admin.";
+    }
+
+    @GetMapping("/test")
+    @PreAuthorize("hasAuthority('TEST')")
+    public String displayOkMessageWhenTest(){
+        return "If you are seeing this, you are fully authenticated as test.";
     }
 
 }

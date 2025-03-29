@@ -12,10 +12,9 @@
 
 # Pré-requisitos
 Antes de começar, certifique-se de ter o seguinte instalado na sua máquina:
-Java 17 ou superior
-Docker
-Docker Compose
-Maven
+* Java 17 ou superior
+* Docker
+* Maven
 
 # Como rodar o projeto:
 

@@ -15,7 +15,7 @@ Antes de começar, certifique-se de ter o seguinte instalado na sua máquina:
 * Java 17 ou superior
 * Docker
 * Maven
-* 
+
 # Para rodar o projeto, siga os seguintes passos:
 git clone https://github.com/MarcosPozzobon/base-auth-spring-security.git
 cd base-auth-spring-security

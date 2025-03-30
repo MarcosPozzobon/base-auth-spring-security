@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: simple-auth-db
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: simple-auth
+    networks:
+      - bridge
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    container_name: base-auth-ap
+
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://simple-auth-db:5432/simple-auth
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - bridge
+    ports:
+      - "9000:9000"
+
+networks:
+  bridge:
+    driver: bridge

@@ -12,12 +12,13 @@ import java.util.HashMap;
 @RestController
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
+@CrossOrigin(value = "*")
 public class AuthController {
 
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public ResponseEntity<HashMap<String, Object>> authenticateUser(@Valid @RequestBody LoginRequestDTO loginRequest) {
+    public ResponseEntity<HashMap<String, Object>> authenticateUser(@RequestBody LoginRequestDTO loginRequest) {
         return ResponseEntity.status(200).body(loginService.validateLogin(loginRequest));
     }
 }

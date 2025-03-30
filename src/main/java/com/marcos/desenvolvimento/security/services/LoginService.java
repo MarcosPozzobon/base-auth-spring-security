@@ -5,9 +5,12 @@ import com.marcos.desenvolvimento.exceptions.InvalidCredentialsException;
 import com.marcos.desenvolvimento.security.jwt.TokenUtils;
 import com.marcos.desenvolvimento.usecases.FindUser;
 import com.marcos.desenvolvimento.usecases.VerifyCredentials;
+import io.jsonwebtoken.ExpiredJwtException;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +35,10 @@ public class LoginService {
         findUser.byLogin(loginRequest.login());
 
         var encodedPassword = verifyCredentials.getEncodedPasswordByLogin(loginRequest.login());
+
+        if(loginRequest.password() == null || loginRequest.password().isEmpty()){
+            throw new InvalidCredentialsException("The password cannot be null or empty.");
+        }
 
         if(!verifyCredentials.passwordMatches(loginRequest.password(), encodedPassword)){
             throw new InvalidCredentialsException();

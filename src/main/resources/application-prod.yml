@@ -7,7 +7,7 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/simple-auth
-    username: root
+    username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
 

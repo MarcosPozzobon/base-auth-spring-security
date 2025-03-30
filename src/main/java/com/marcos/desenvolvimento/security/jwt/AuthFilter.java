@@ -1,7 +1,7 @@
 package com.marcos.desenvolvimento.security.jwt;
 
+import com.marcos.desenvolvimento.exceptions.InvalidCredentialsException;
 import com.marcos.desenvolvimento.security.services.UserDetailsServiceImpl;
-import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

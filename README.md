@@ -9,6 +9,7 @@
 * PostgreSQL: Banco de dados relacional.
 * Docker: Contêineres para simplificar o ambiente de desenvolvimento e produção.
 * Maven: Gerenciador de dependências e build para projetos Java.
+* Lombok: Para simplificar o desenvolvimento e evitar boilerplate.
 
 # Pré-requisitos
 Antes de começar, certifique-se de ter o seguinte instalado na sua máquina:

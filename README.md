@@ -20,16 +20,13 @@ Antes de começar, certifique-se de ter o seguinte instalado na sua máquina:
 * git clone https://github.com/MarcosPozzobon/base-auth-spring-security.git
 * cd base-auth-spring-security
 
-# Suba os contêineres com Docker Compose:
+# Suba os containers com Docker Compose:
 docker-compose up -d --build
 
 # Endpoints Principais
-POST /auth/login: Endpoint para login (gera o JWT).
+* POST /auth/login: Endpoint para login (gera o JWT).
+* GET /protected-resource: Recurso protegido que requer o JWT no cabeçalho da requisição. (Authorization Bearer)
 
-Exemplo de body:
-{
-  "login": "admin",
-  "password": "root"
-}
+# Exemplo de chamada
+curl -X POST "http://localhost:9000/api/v1/auth/login" -H "Content-Type: application/json" -d '{"login": "admin","password": "root"}'
 
-GET /protected-resource: Recurso protegido que requer o JWT no cabeçalho da requisição. (Authorization Bearer)

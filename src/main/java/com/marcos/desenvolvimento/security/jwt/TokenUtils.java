@@ -9,13 +9,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchProperties;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 
 
@@ -32,7 +29,6 @@ public class TokenUtils {
 
     @Getter
     private static ExpiredJwtException lastExpiredException;
-
     public String getTokenFromRequest(HttpServletRequest request) {
         var authHeader = request.getHeader("Authorization");
         if (authHeader == null) {
@@ -62,9 +58,9 @@ public class TokenUtils {
                 .claim("name", user.getUsername())
                 .claim("authorities", user.getAuthorities())
                 .issuedAt(new Date())
-                .expiration(Date.from(LocalDateTime.now().plusMinutes(1)
-                        .atZone(ZoneId.systemDefault()).toInstant()))
-                //.expiration(new Date(new Date().getTime() + jwtExpirationMs))
+                //.expiration(Date.from(LocalDateTime.now().plusMinutes(1)
+                //        .atZone(ZoneId.systemDefault()).toInstant()))
+                .expiration(new Date(new Date().getTime() + jwtExpirationMs))
                 .signWith(getSigningKey(jwtSecret))
                 .compact();
     }

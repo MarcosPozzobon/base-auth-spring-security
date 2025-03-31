@@ -80,11 +80,11 @@ public class WebSecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173")); // URL do frontend
+        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
         configuration.setAllowedMethods(List.of("*"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // Permite headers
-        configuration.setExposedHeaders(List.of("Authorization")); // Expõe headers
-        configuration.setAllowCredentials(true); // Permite cookies/tokens
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setExposedHeaders(List.of("Authorization"));
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

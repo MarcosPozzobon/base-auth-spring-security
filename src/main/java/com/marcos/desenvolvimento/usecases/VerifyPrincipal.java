@@ -11,10 +11,10 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class VerifyPrincipal {
 
-    private final FindUser findUser;
+    private final UserUseCase userUseCase;
 
     public void execute(final Long id, final Principal principal) {
-        final User user = findUser.byLogin(principal.getName());
+        final User user = userUseCase.byLogin(principal.getName());
 
         if (user.getId().equals(id)) {
             return;

@@ -31,6 +31,18 @@ import static org.springframework.http.HttpStatus.*;
 public class RestExceptionHandler {
 
     @ResponseStatus(NOT_FOUND)
+    @ExceptionHandler(InvalidObjectException.class)
+    public ExceptionFilters handleInvalidObjectException(final InvalidObjectException ex) {
+        return ExceptionFilters.builder()
+                .timestamp(LocalDateTime.now())
+                .details(ex.getMessage())
+                .status(422)
+                .title("Invalid data!")
+                .build();
+    }
+
+
+    @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(UserNotFoundException.class)
     public ExceptionFilters handleUserNotFound(final UserNotFoundException ex) {
         return ExceptionFilters.builder()

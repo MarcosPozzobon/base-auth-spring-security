@@ -1,7 +1,7 @@
 package com.marcos.desenvolvimento.security.services;
 
 
-import com.marcos.desenvolvimento.usecases.UserUseCase;
+import com.marcos.desenvolvimento.usecases.FindUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,12 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserUseCase userUseCase;
+    private final FindUser findUser;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String loginOrEmail) throws UsernameNotFoundException {
-        final var user = userUseCase.byLogin(loginOrEmail);
+        final var user = findUser.byLogin(loginOrEmail);
 
         final var authorityListAdmin = AuthorityUtils.createAuthorityList("USER", "ADMIN");
         final var authorityListUser = AuthorityUtils.createAuthorityList("USER");

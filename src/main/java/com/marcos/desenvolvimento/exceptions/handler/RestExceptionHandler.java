@@ -169,17 +169,6 @@ public class RestExceptionHandler {
                 .build();
     }
 
-    /*
-    @ResponseStatus(BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ExceptionFilters methodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        return ExceptionFilters.builder()
-                .timestamp(LocalDateTime.now())
-                .status(BAD_REQUEST.value())
-                .title("MethodArgumentNotValidException")
-                .build();
-    }*/
-
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
     public ExceptionFilters handleIllegalArgumentException(IllegalArgumentException ex) {

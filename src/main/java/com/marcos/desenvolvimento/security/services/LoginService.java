@@ -3,7 +3,7 @@ package com.marcos.desenvolvimento.security.services;
 import com.marcos.desenvolvimento.controllers.dtos.requests.LoginRequestDTO;
 import com.marcos.desenvolvimento.exceptions.InvalidCredentialsException;
 import com.marcos.desenvolvimento.security.jwt.TokenUtils;
-import com.marcos.desenvolvimento.usecases.UserUseCase;
+import com.marcos.desenvolvimento.usecases.FindUser;
 import com.marcos.desenvolvimento.usecases.VerifyCredentials;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class LoginService {
 
-    private final UserUseCase userUseCase;
+    private final FindUser findUser;
 
     private final VerifyCredentials verifyCredentials;
 
@@ -29,7 +29,7 @@ public class LoginService {
 
         HashMap<String, Object> validToken = new HashMap<>();
 
-        userUseCase.byLogin(loginRequest.login());
+        findUser.byLogin(loginRequest.login());
 
         var encodedPassword = verifyCredentials.getEncodedPasswordByLogin(loginRequest.login());
 
